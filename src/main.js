@@ -15,7 +15,7 @@ let string = `
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
   border: none;
 }
-
+/*稍微提一提速哦>*/
 #taichi {
   background: linear-gradient(
     90deg,
@@ -52,7 +52,7 @@ let string = `
   border-radius: 50%;
 }
 /*太极图现已完成！*/
-/*现在我们使它旋转起来*/
+/*现在我们使它旋转起来<*/
 @keyframes rotate{
   0%{
     transform: rotate(0deg);
@@ -68,11 +68,14 @@ let string = `
 `;
 let string2 = ``;
 let count = -1;
+let speed = 50;
 
 let step = () => {
   setTimeout(() => {
     if (count++ < string.length - 1) {
       //   demo.innerHTML = string.substring(0, count);
+      string[count] === '>' && (speed = 7);
+      string[count] === '<' && (speed = 60);
       string2 +=
         string[count] === "\n"
           ? "<br>"
@@ -85,7 +88,7 @@ let step = () => {
       html.scrollTo(0, 999999);
       step();
     }
-  }, 50);
+  }, speed);
 };
 
 step();

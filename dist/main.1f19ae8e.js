@@ -120,14 +120,17 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"main.js":[function(require,module,exports) {
 var html = document.querySelector("#html");
 var style = document.querySelector("#style");
-var string = "\n/*\u60A8\u597D\uFF0C\u6211\u662F\u4E00\u540D\u524D\u7AEF\u65B0\u4EBA\u3002\n\u73B0\u5728\u6211\u4EEC\u5F00\u59CB\u753B\u4E00\u4E2A\u4F1A\u52A8\u7684\u592A\u6781\u56FE\uFF1A*/\n/*\u5148\u753B\u51FA\u4E3B\u4F53\u7684\u9634\u9633\u534A\u7403*/\n#taichi {\n  border: 1px solid red;\n  width: 200px;\n  height: 200px;\n}\n\n#taichi {\n  border-radius: 50%;\n  box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);\n  border: none;\n}\n\n#taichi {\n  background: linear-gradient(\n    90deg,\n    rgba(255, 255, 255, 1) 0%,\n    rgba(255, 255, 255, 1) 50%,\n    rgba(0, 0, 0, 1) 50%,\n    rgba(0, 0, 0, 1) 100%\n  );\n}\n/*\u8865\u5B8C\u5269\u4E0B\u7684\u7EC6\u8282\u90E8\u5206*/\n#taichi::before {\n  content: \"\";\n  display: block;\n  width: 100px;\n  height: 100px;\n  position: absolute;\n  top: 0;\n  left: 50%;\n  transform: translate(-50%);\n  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 25%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 100%);\n    border-radius: 50%;\n}\n\n#taichi::after {\n  content: \"\";\n  display: block;\n  width: 100px;\n  height: 100px;\n  position: absolute;\n  bottom: 0;\n  left: 50%;\n  transform: translate(-50%);\n  background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 25%, rgba(255,255,255,1) 25%, rgba(255,255,255,1) 100%);\n  border-radius: 50%;\n}\n/*\u592A\u6781\u56FE\u73B0\u5DF2\u5B8C\u6210\uFF01*/\n/*\u73B0\u5728\u6211\u4EEC\u4F7F\u5B83\u65CB\u8F6C\u8D77\u6765*/\n@keyframes rotate{\n  0%{\n    transform: rotate(0deg);\n  }\n  100%{\n    transform: rotate(360deg);\n  }\n}\n\n#taichi{\n  animation: rotate 2.5s linear infinite;\n}\n";
+var string = "\n/*\u60A8\u597D\uFF0C\u6211\u662F\u4E00\u540D\u524D\u7AEF\u65B0\u4EBA\u3002\n\u73B0\u5728\u6211\u4EEC\u5F00\u59CB\u753B\u4E00\u4E2A\u4F1A\u52A8\u7684\u592A\u6781\u56FE\uFF1A*/\n/*\u5148\u753B\u51FA\u4E3B\u4F53\u7684\u9634\u9633\u534A\u7403*/\n#taichi {\n  border: 1px solid red;\n  width: 200px;\n  height: 200px;\n}\n\n#taichi {\n  border-radius: 50%;\n  box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);\n  border: none;\n}\n/*\u7A0D\u5FAE\u63D0\u4E00\u63D0\u901F\u54E6>*/\n#taichi {\n  background: linear-gradient(\n    90deg,\n    rgba(255, 255, 255, 1) 0%,\n    rgba(255, 255, 255, 1) 50%,\n    rgba(0, 0, 0, 1) 50%,\n    rgba(0, 0, 0, 1) 100%\n  );\n}\n/*\u8865\u5B8C\u5269\u4E0B\u7684\u7EC6\u8282\u90E8\u5206*/\n#taichi::before {\n  content: \"\";\n  display: block;\n  width: 100px;\n  height: 100px;\n  position: absolute;\n  top: 0;\n  left: 50%;\n  transform: translate(-50%);\n  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 25%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 100%);\n    border-radius: 50%;\n}\n\n#taichi::after {\n  content: \"\";\n  display: block;\n  width: 100px;\n  height: 100px;\n  position: absolute;\n  bottom: 0;\n  left: 50%;\n  transform: translate(-50%);\n  background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 25%, rgba(255,255,255,1) 25%, rgba(255,255,255,1) 100%);\n  border-radius: 50%;\n}\n/*\u592A\u6781\u56FE\u73B0\u5DF2\u5B8C\u6210\uFF01*/\n/*\u73B0\u5728\u6211\u4EEC\u4F7F\u5B83\u65CB\u8F6C\u8D77\u6765<*/\n@keyframes rotate{\n  0%{\n    transform: rotate(0deg);\n  }\n  100%{\n    transform: rotate(360deg);\n  }\n}\n\n#taichi{\n  animation: rotate 2.5s linear infinite;\n}\n";
 var string2 = "";
 var count = -1;
+var speed = 50;
 
 var step = function step() {
   setTimeout(function () {
     if (count++ < string.length - 1) {
       //   demo.innerHTML = string.substring(0, count);
+      string[count] === '>' && (speed = 7);
+      string[count] === '<' && (speed = 60);
       string2 += string[count] === "\n" ? "<br>" : string[count] === " " ? "&nbsp;" : string[count];
       html.innerHTML = string2;
       style.innerHTML = string.substring(0, count + 1);
@@ -135,7 +138,7 @@ var step = function step() {
       html.scrollTo(0, 999999);
       step();
     }
-  }, 50);
+  }, speed);
 };
 
 step();
@@ -167,7 +170,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "5950" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4043" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
